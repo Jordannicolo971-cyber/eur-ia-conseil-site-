@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EUR'IA — Agents vocaux IA pour entreprises de Guadeloupe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0A0F14;
+    --bg-elevated: #101923;
+    --bg-elevated-2: #14202C;
+    --line: #223140;
+    --turquoise: #2FE6C4;
+    --amber: #FFB443;
+    --text: #F3F6F5;
+    --text-muted: #8CA5AC;
+    --text-dim: #5C7078;
+    --radius: 14px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    line-height:1.08;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+  }
+
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit; cursor:pointer;}
+
+  :focus-visible{
+    outline:2px solid var(--turquoise);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(10,15,20,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-size:1.25rem;
+    font-weight:600;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{color:var(--turquoise);}
+  .nav-links{
+    display:flex; gap:34px;
+    font-size:0.94rem;
+    font-weight:500;
+  }
+  .nav-links a{
+    color:var(--text-muted);
+    position:relative;
+    padding:6px 0;
+    transition:color .2s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--text);}
+  .nav-links a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0; height:1.5px;
+    background:var(--turquoise);
+    transition:width .25s ease;
+  }
+  .nav-links a:hover::after, .nav-links a:focus-visible::after{width:100%;}
+
+  .nav-cta{
+    background:var(--turquoise);
+    color:#06201B;
+    padding:11px 20px;
+    border-radius:100px;
+    font-weight:600;
+    font-size:0.92rem;
+    border:none;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .nav-cta:hover{transform:translateY(-1px); box-shadow:0 8px 24px -8px rgba(47,230,196,0.5);}
+
+  .burger{display:none; flex-direction:column; gap:5px; background:none; border:none;}
+  .burger span{width:22px; height:2px; background:var(--text);}
+
+  .mobile-menu{
+    display:none;
+    flex-direction:column;
+    background:var(--bg-elevated);
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{
+    padding:16px 28px;
+    border-top:1px solid var(--line);
+    color:var(--text-muted);
+    font-weight:500;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:100px 0 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; top:-200px; right:-160px;
+    width:520px; height:520px;
+    background:radial-gradient(circle, rgba(47,230,196,0.14), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:64px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 4.2vw, 3.4rem);
+    margin:18px 0 22px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--turquoise);
+  }
+  .hero p.lead{
+    font-size:1.1rem;
+    color:var(--text-muted);
+    max-width:520px;
+    margin-bottom:34px;
+  }
+  .hero-actions{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--turquoise);
+    color:#06201B;
+    padding:15px 26px;
+    border-radius:100px;
+    font-weight:600;
+    border:none;
+    font-size:0.98rem;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 28px -8px rgba(47,230,196,0.55);}
+  .btn-ghost{
+    padding:15px 24px;
+    border-radius:100px;
+    border:1px solid var(--line);
+    color:var(--text);
+    font-weight:500;
+    font-size:0.98rem;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--turquoise); background:rgba(47,230,196,0.06);}
+
+  /* Signature: call → transcript panel */
+  .call-panel{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+    position:relative;
+  }
+  .call-panel-head{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:18px;
+  }
+  .call-status{
+    display:flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--turquoise);
+  }
+  .pulse-dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--turquoise);
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1; box-shadow:0 0 0 0 rgba(47,230,196,0.5);}
+    50%{opacity:0.55; box-shadow:0 0 0 6px rgba(47,230,196,0);}
+  }
+  .call-agent{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--text-dim);
+  }
+
+  .waveform{
+    display:flex; align-items:flex-end; gap:3px;
+    height:52px;
+    margin-bottom:20px;
+  }
+  .waveform span{
+    flex:1;
+    background:linear-gradient(180deg, var(--turquoise), rgba(47,230,196,0.25));
+    border-radius:2px;
+    animation:bar 1.2s ease-in-out infinite;
+  }
+  @keyframes bar{
+    0%,100%{transform:scaleY(0.25);}
+    50%{transform:scaleY(1);}
+  }
+
+  .transcript{
+    display:flex; flex-direction:column; gap:10px;
+    min-height:150px;
+    font-size:0.92rem;
+  }
+  .bubble{
+    max-width:88%;
+    padding:10px 14px;
+    border-radius:10px;
+    opacity:0;
+    transform:translateY(6px);
+    animation:appear .5s ease forwards;
+  }
+  .bubble.client{
+    align-self:flex-start;
+    background:var(--bg-elevated-2);
+    color:var(--text-muted);
+    border-bottom-left-radius:2px;
+  }
+  .bubble.diana{
+    align-self:flex-end;
+    background:rgba(47,230,196,0.12);
+    border:1px solid rgba(47,230,196,0.3);
+    color:var(--text);
+    border-bottom-right-radius:2px;
+  }
+  @keyframes appear{to{opacity:1; transform:translateY(0);}}
+
+  .call-footer{
+    margin-top:18px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    display:flex; justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--text-dim);
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:88px 0;}
+  .section-head{
+    max-width:640px;
+    margin-bottom:52px;
+  }
+  .section-head h2{font-size:clamp(1.7rem, 3vw, 2.3rem); margin-top:14px;}
+  .section-head p{color:var(--text-muted); margin-top:14px; font-size:1.02rem;}
+
+  /* ---------- CAPABILITIES ---------- */
+  .cap-row{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .cap{
+    background:var(--bg-elevated);
+    padding:30px 24px;
+  }
+  .cap svg{margin-bottom:16px;}
+  .cap h3{font-size:1.05rem; font-weight:600; font-family:'Inter'; margin-bottom:8px;}
+  .cap p{color:var(--text-muted); font-size:0.92rem;}
+
+  /* ---------- AGENTS DUO ---------- */
+  .duo{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .agent-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:36px;
+    position:relative;
+  }
+  .agent-card .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--amber);
+  }
+  .agent-card h3{
+    font-size:1.9rem;
+    margin:12px 0 14px;
+  }
+  .agent-card p{color:var(--text-muted); font-size:0.96rem; margin-bottom:22px;}
+  .agent-card ul li{
+    display:flex; gap:10px;
+    color:var(--text);
+    font-size:0.92rem;
+    padding:8px 0;
+    border-top:1px solid var(--line);
+  }
+  .agent-card ul li:first-child{border-top:none;}
+  .agent-card ul li::before{
+    content:"→";
+    color:var(--turquoise);
+  }
+
+  /* ---------- SECTORS ---------- */
+  .sector-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+  }
+  .sector{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 22px;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .sector:hover{border-color:var(--turquoise); transform:translateY(-2px);}
+  .sector .eyebrow{color:var(--amber);}
+  .sector h3{font-family:'Inter'; font-weight:600; font-size:1.02rem; margin:8px 0 6px;}
+  .sector p{color:var(--text-muted); font-size:0.88rem;}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:0;
+    position:relative;
+  }
+  .step{padding-right:30px; position:relative;}
+  .step:not(:last-child)::after{
+    content:"";
+    position:absolute; top:22px; right:-4px;
+    width:60%; height:1px;
+    background:var(--line);
+  }
+  .step .num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--turquoise);
+    font-size:0.85rem;
+    margin-bottom:16px;
+    display:block;
+  }
+  .step h3{font-size:1.15rem; margin-bottom:10px;}
+  .step p{color:var(--text-muted); font-size:0.92rem;}
+
+  /* ---------- QUIZ ---------- */
+  .quiz-panel{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:44px;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .quiz-progress{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+  }
+  .quiz-step h3, .quiz-result h3{
+    font-size:1.5rem;
+    margin:14px 0 26px;
+  }
+  .quiz-result h3{
+    font-size:2rem;
+    margin-bottom:12px;
+  }
+  .quiz-options-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:12px;
+  }
+  .quiz-options-grid button{
+    background:var(--bg-elevated-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 14px;
+    color:var(--text);
+    font-family:'Inter';
+    font-size:0.92rem;
+    font-weight:500;
+    text-align:center;
+    transition:border-color .2s ease, transform .2s ease, background .2s ease;
+  }
+  .quiz-options-grid button:hover, .quiz-options-grid button:focus-visible{
+    border-color:var(--turquoise);
+    background:rgba(47,230,196,0.08);
+    transform:translateY(-2px);
+  }
+  .quiz-options-stack{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .quiz-options-stack button{
+    background:var(--bg-elevated-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .quiz-options-stack button:hover, .quiz-options-stack button:focus-visible{
+    border-color:var(--turquoise);
+    background:rgba(47,230,196,0.08);
+  }
+  .quiz-options-stack button strong{
+    font-family:'Inter';
+    font-size:0.98rem;
+    color:var(--text);
+  }
+  .quiz-options-stack button span{
+    font-size:0.86rem;
+    color:var(--text-muted);
+  }
+  .quiz-back{
+    margin-top:22px;
+    background:none;
+    border:none;
+    color:var(--text-dim);
+    font-size:0.85rem;
+  }
+  .quiz-back:hover{color:var(--turquoise);}
+  .quiz-result p{
+    color:var(--text-muted);
+    font-size:1rem;
+    margin-bottom:28px;
+    max-width:520px;
+  }
+  .quiz-result-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .lead-box{
+    margin-top:32px;
+    padding-top:28px;
+    border-top:1px solid var(--line);
+  }
+  .lead-box-title{
+    font-size:0.9rem;
+    color:var(--text-muted);
+    margin-bottom:14px;
+  }
+  .lead-fields{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .lead-fields input{
+    flex:1;
+    min-width:160px;
+    background:var(--bg-elevated-2);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:12px 18px;
+    color:var(--text);
+    font-family:'Inter';
+    font-size:0.9rem;
+  }
+  .lead-fields input::placeholder{color:var(--text-dim);}
+  .lead-fields input:focus-visible{border-color:var(--turquoise);}
+  .lead-box-note{
+    margin-top:12px;
+    font-size:0.85rem;
+    color:var(--turquoise);
+    min-height:1.2em;
+  }
+  .lead-box-note.error{color:#FF8A8A;}
+  @media (max-width: 620px){
+    .lead-fields{flex-direction:column;}
+    .lead-fields input, .lead-fields button{width:100%;}
+  }
+  @media (max-width: 620px){
+    .quiz-panel{padding:28px 22px;}
+    .quiz-options-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+
+  /* ---------- PRICING ---------- */
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .plan{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px 28px;
+    display:flex; flex-direction:column;
+  }
+  .plan.featured{
+    border-color:var(--turquoise);
+    background:linear-gradient(180deg, rgba(47,230,196,0.07), var(--bg-elevated) 40%);
+  }
+  .plan-name{font-family:'IBM Plex Mono', monospace; font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);}
+  .plan.featured .plan-name{color:var(--turquoise);}
+  .plan-price{font-family:'Fraunces'; font-size:2.4rem; margin:14px 0 4px;}
+  .plan-price span{font-size:1rem; color:var(--text-dim); font-family:'Inter';}
+  .plan-desc{color:var(--text-muted); font-size:0.9rem; margin-bottom:24px;}
+  .plan ul{flex:1; margin-bottom:26px;}
+  .plan ul li{
+    padding:9px 0;
+    border-top:1px solid var(--line);
+    font-size:0.9rem;
+    color:var(--text);
+    display:flex; gap:10px;
+  }
+  .plan ul li:first-child{border-top:none;}
+  .plan ul li::before{content:"✓"; color:var(--turquoise); flex-shrink:0;}
+  .plan-cta{
+    text-align:center;
+    padding:13px;
+    border-radius:100px;
+    border:1px solid var(--line);
+    font-weight:600;
+    font-size:0.92rem;
+    transition:all .2s ease;
+  }
+  .plan.featured .plan-cta{background:var(--turquoise); color:#06201B; border-color:var(--turquoise);}
+  .plan-cta:hover{border-color:var(--turquoise);}
+
+  /* ---------- FINAL CTA ---------- */
+  .cta-final{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:64px 56px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .cta-final::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 50% 0%, rgba(47,230,196,0.12), transparent 60%);
+  }
+  .cta-final h2{font-size:clamp(1.8rem, 3.5vw, 2.5rem); position:relative;}
+  .cta-final p{color:var(--text-muted); max-width:480px; margin:16px auto 30px; position:relative;}
+  .cta-final .btn-primary{position:relative; padding:17px 34px; font-size:1.02rem;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:40px 0;
+  }
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+  }
+  footer p{color:var(--text-dim); font-size:0.85rem;}
+  .footer-links{display:flex; gap:22px;}
+  .footer-links a{color:var(--text-dim); font-size:0.85rem;}
+  .footer-links a:hover{color:var(--turquoise);}
+
+  @media (max-width: 880px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero-grid{grid-template-columns:1fr;}
+    .cap-row{grid-template-columns:repeat(2, 1fr);}
+    .duo{grid-template-columns:1fr;}
+    .sector-grid{grid-template-columns:repeat(2, 1fr);}
+    .steps{grid-template-columns:1fr; gap:34px;}
+    .step::after{display:none;}
+    .pricing-grid{grid-template-columns:1fr;}
+    .cta-final{padding:48px 24px;}
+  }
+  @media (max-width: 520px){
+    .cap-row{grid-template-columns:1fr;}
+    .sector-grid{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="logo"><span class="dot">●</span> EUR'IA</a>
+    <ul class="nav-links">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#services">Ce qu'on fait</a></li>
+      <li><a href="#agents">Nos agents</a></li>
+      <li><a href="#secteurs">Secteurs</a></li>
+      <li><a href="#quiz">Quel agent choisir ?</a></li>
+    </ul>
+    <a href="https://eur-ia-onbaording.vercel.app" class="nav-cta" target="_blank" rel="noopener">Démarrer mon projet</a>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#accueil">Accueil</a>
+    <a href="#services">Ce qu'on fait</a>
+    <a href="#agents">Nos agents</a>
+    <a href="#secteurs">Secteurs</a>
+    <a href="#quiz">Quel agent choisir ?</a>
+    <a href="https://eur-ia-onbaording.vercel.app" target="_blank" rel="noopener">Démarrer mon projet →</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="accueil">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Agents vocaux IA · Guadeloupe</span>
+        <h1>Votre téléphone ne <em>manque</em><br>plus jamais un client.</h1>
+        <p class="lead">EUR'IA conçoit des agents vocaux qui répondent à vos appels, prennent les rendez-vous et relancent vos prospects — en français comme en créole, 24h/24, sans embaucher personne.</p>
+        <div class="hero-actions">
+          <a href="https://eur-ia-onbaording.vercel.app" class="btn-primary" target="_blank" rel="noopener">Remplir le formulaire de démarrage</a>
+          <a href="#agents" class="btn-ghost">Voir comment ça marche</a>
+        </div>
+      </div>
+
+      <div class="call-panel">
+        <div class="call-panel-head">
+          <div class="call-status"><span class="pulse-dot"></span> APPEL EN COURS</div>
+          <div class="call-agent">AGENT · DIANA</div>
+        </div>
+        <div class="waveform" id="waveform"></div>
+        <div class="transcript" id="transcript"></div>
+        <div class="call-footer">
+          <span>00:24</span>
+          <span>RDV pris automatiquement</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Ce qu'on fait</span>
+        <h2>Un standard téléphonique qui ne dort jamais.</h2>
+        <p>Nous construisons, branchons et gérons vos agents vocaux IA de bout en bout — connectés à votre agenda et à vos outils existants.</p>
+      </div>
+      <div class="cap-row">
+        <div class="cap">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M4 13c0-5 4-9 9-9s9 4 9 9" stroke="#2FE6C4" stroke-width="1.6"/><rect x="2" y="12" width="4" height="8" rx="1.5" stroke="#2FE6C4" stroke-width="1.6"/><rect x="20" y="12" width="4" height="8" rx="1.5" stroke="#2FE6C4" stroke-width="1.6"/></svg>
+          <h3>Réception d'appels</h3>
+          <p>Chaque appel entrant est décroché en quelques secondes, jour et nuit, week-ends compris.</p>
+        </div>
+        <div class="cap">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="3" y="3" width="20" height="20" rx="3" stroke="#2FE6C4" stroke-width="1.6"/><path d="M8 13l3.5 3.5L18 9" stroke="#2FE6C4" stroke-width="1.6"/></svg>
+          <h3>Prise de rendez-vous</h3>
+          <p>L'agent consulte votre agenda en direct et confirme le créneau sans intervention humaine.</p>
+        </div>
+        <div class="cap">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M3 8l10 6 10-6" stroke="#2FE6C4" stroke-width="1.6"/><rect x="3" y="5" width="20" height="16" rx="2.5" stroke="#2FE6C4" stroke-width="1.6"/></svg>
+          <h3>Relance de prospects</h3>
+          <p>Devis sans réponse, clients à recontacter : l'agent sortant appelle pour vous à votre place.</p>
+        </div>
+        <div class="cap">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="#2FE6C4" stroke-width="1.6"/><path d="M13 8v6l4 2" stroke="#2FE6C4" stroke-width="1.6"/></svg>
+          <h3>Gestion des débordements</h3>
+          <p>Aux heures de pointe, l'agent prend le relais pour qu'aucun client ne tombe sur une sonnerie dans le vide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGENTS -->
+  <section id="agents">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Nos agents</span>
+        <h2>Deux agents, deux sens d'appel.</h2>
+        <p>Diana reçoit. Marie prospecte. Ensemble, ils couvrent l'intégralité du parcours téléphonique de votre entreprise.</p>
+      </div>
+      <div class="duo">
+        <div class="agent-card">
+          <span class="tag">Entrant</span>
+          <h3>Diana</h3>
+          <p>Décroche chaque appel entrant, comprend la demande du client et prend rendez-vous directement dans votre agenda.</p>
+          <ul>
+            <li>Réponse en moins de 3 secondes</li>
+            <li>Comprend le français et le créole</li>
+            <li>Synchronisée avec votre calendrier</li>
+            <li>Transfère les urgences vers vous</li>
+          </ul>
+        </div>
+        <div class="agent-card">
+          <span class="tag">Sortant</span>
+          <h3>Marie</h3>
+          <p>Appelle vos prospects et clients pour relancer un devis, confirmer un rendez-vous ou réactiver un contact dormant.</p>
+          <ul>
+            <li>Campagnes d'appels programmées</li>
+            <li>Relance des devis sans réponse</li>
+            <li>Qualifie les prospects chauds</li>
+            <li>Rapport d'appel après chaque campagne</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTEURS -->
+  <section id="secteurs">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Secteurs</span>
+        <h2>Pensé pour les métiers de terrain.</h2>
+        <p>Chaque secteur a ses propres urgences téléphoniques. Nos agents sont configurés en fonction du vôtre.</p>
+      </div>
+      <div class="sector-grid">
+        <div class="sector"><span class="eyebrow">BTP</span><h3>Bâtiment &amp; artisans</h3><p>Prise de rendez-vous chantier et relance de devis en attente.</p></div>
+        <div class="sector"><span class="eyebrow">Santé animale</span><h3>Vétérinaires</h3><p>Gestion des urgences et des créneaux de consultation.</p></div>
+        <div class="sector"><span class="eyebrow">Santé</span><h3>Kinésithérapie</h3><p>Prise de rendez-vous et rappels pour limiter les absences.</p></div>
+        <div class="sector"><span class="eyebrow">Beauté</span><h3>Coiffure</h3><p>Réservation de créneaux et gestion des annulations.</p></div>
+        <div class="sector"><span class="eyebrow">Beauté</span><h3>Esthétique</h3><p>Accueil téléphonique et prise de rendez-vous en cabine.</p></div>
+        <div class="sector"><span class="eyebrow">Immobilier</span><h3>Agences immobilières</h3><p>Qualification des appels et prise de rendez-vous visite.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT CA MARCHE -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Comment ça marche</span>
+        <h2>De l'appel au rendez-vous, sans intervention.</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="num">01</span>
+          <h3>Un appel arrive (ou part)</h3>
+          <p>Un client compose votre numéro, ou l'agent sortant appelle un prospect à relancer.</p>
+        </div>
+        <div class="step">
+          <span class="num">02</span>
+          <h3>L'agent échange naturellement</h3>
+          <p>En français ou en créole, l'agent comprend la demande et répond comme le ferait votre équipe.</p>
+        </div>
+        <div class="step">
+          <span class="num">03</span>
+          <h3>Le rendez-vous est réservé</h3>
+          <p>Le créneau est confirmé directement dans votre agenda, sans ressaisie ni appel manqué.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUESTIONNAIRE -->
+  <section id="quiz">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Vous hésitez ?</span>
+        <h2>Trouvez l'agent qu'il vous faut en 30 secondes.</h2>
+        <p>Deux questions rapides, et on vous dit si c'est Diana, Marie, ou les deux qu'il vous faut.</p>
+      </div>
+
+      <div class="quiz-panel">
+
+        <!-- Étape 1 -->
+        <div class="quiz-step" id="quizStep1">
+          <span class="quiz-progress">Étape 1 / 2</span>
+          <h3>Quel est votre secteur d'activité ?</h3>
+          <div class="quiz-options quiz-options-grid" data-question="secteur">
+            <button type="button" data-value="BTP">BTP &amp; artisans</button>
+            <button type="button" data-value="vétérinaire">Vétérinaire</button>
+            <button type="button" data-value="kinésithérapie">Kinésithérapie</button>
+            <button type="button" data-value="coiffure">Coiffure</button>
+            <button type="button" data-value="esthétique">Esthétique</button>
+            <button type="button" data-value="immobilier">Immobilier</button>
+            <button type="button" data-value="votre activité">Autre activité</button>
+          </div>
+        </div>
+
+        <!-- Étape 2 -->
+        <div class="quiz-step" id="quizStep2" hidden>
+          <span class="quiz-progress">Étape 2 / 2</span>
+          <h3>Quel est votre principal défi aujourd'hui ?</h3>
+          <div class="quiz-options quiz-options-stack" data-question="besoin">
+            <button type="button" data-value="inbound">
+              <strong>Je rate des appels et des rendez-vous</strong>
+              <span>Le téléphone sonne pendant que vous travaillez, et vous perdez des clients.</span>
+            </button>
+            <button type="button" data-value="outbound">
+              <strong>Je n'ai pas le temps de relancer mes prospects</strong>
+              <span>Devis envoyés sans réponse, clients à recontacter, prospection qui traîne.</span>
+            </button>
+            <button type="button" data-value="both">
+              <strong>Les deux à la fois</strong>
+              <span>Vous perdez des appels et vous n'avez pas le temps de relancer.</span>
+            </button>
+          </div>
+          <button type="button" class="quiz-back" id="quizBack">← Revenir à l'étape précédente</button>
+        </div>
+
+        <!-- Résultat -->
+        <div class="quiz-result" id="quizResult" hidden>
+          <span class="quiz-progress">Votre recommandation</span>
+          <h3 id="quizResultTitle">Diana</h3>
+          <p id="quizResultText"></p>
+          <div class="quiz-result-actions">
+            <a href="https://eur-ia-onbaording.vercel.app" class="btn-primary" target="_blank" rel="noopener">Démarrer avec cet agent</a>
+            <button type="button" class="btn-ghost" id="quizRestart">Recommencer</button>
+          </div>
+
+          <div class="lead-box" id="leadBox">
+            <p class="lead-box-title">Vous préférez qu'on vous rappelle plutôt que de remplir le formulaire ?</p>
+            <div class="lead-fields">
+              <input type="text" id="leadName" placeholder="Votre prénom" autocomplete="given-name">
+              <input type="text" id="leadContact" placeholder="Téléphone ou email" autocomplete="tel">
+              <button type="button" class="btn-ghost" id="leadSubmit">Être rappelé</button>
+            </div>
+            <p class="lead-box-note" id="leadNote"></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section>
+    <div class="wrap">
+      <div class="cta-final">
+        <span class="eyebrow">Prêt à démarrer</span>
+        <h2>Parlons de votre entreprise.</h2>
+        <p>Remplissez le formulaire de démarrage : nous configurons votre agent vocal sur mesure et revenons vers vous sous 48h.</p>
+        <a href="https://eur-ia-onbaording.vercel.app" class="btn-primary" target="_blank" rel="noopener">Remplir le formulaire</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <p>© 2026 EUR'IA — Agents vocaux IA, Guadeloupe.</p>
+    <div class="footer-links">
+      <a href="#services">Ce qu'on fait</a>
+      <a href="#secteurs">Secteurs</a>
+      <a href="https://eur-ia-onbaording.vercel.app" target="_blank" rel="noopener">Formulaire</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ==== CONFIGURATION SUPABASE ====
+  // Remplace ces deux valeurs par celles de ton projet Supabase
+  // (Project Settings → API → Project URL / anon public key)
+  const SUPABASE_URL = 'https://uyehsgtqkrxzxaiybddv.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_eQGzuzlYK2T1gFT1O-RdtA';
+  const supabaseClient = (SUPABASE_URL.startsWith('http'))
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+  // =================================
+
+  // Mobile menu toggle
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    burger.setAttribute('aria-expanded', false);
+  }));
+
+  // Waveform bars
+  const waveform = document.getElementById('waveform');
+  const barCount = 36;
+  for (let i = 0; i < barCount; i++) {
+    const bar = document.createElement('span');
+    bar.style.animationDelay = (Math.random() * 1.2).toFixed(2) + 's';
+    bar.style.animationDuration = (0.8 + Math.random() * 0.8).toFixed(2) + 's';
+    waveform.appendChild(bar);
+  }
+
+  // Transcript loop
+  const script = [
+    { who: 'client', text: 'Bonjour, je voudrais un rendez-vous cette semaine.' },
+    { who: 'diana', text: 'Bien sûr ! Jeudi 10h ou vendredi 14h, ça vous convient ?' },
+    { who: 'client', text: 'Vendredi 14h, parfait.' },
+    { who: 'diana', text: 'C\\'est noté, vous recevez la confirmation par SMS.' }
+  ];
+  const transcript = document.getElementById('transcript');
+  let i = 0;
+
+  function playScript(){
+    transcript.innerHTML = '';
+    i = 0;
+    step();
+  }
+  function step(){
+    if (i >= script.length) {
+      setTimeout(playScript, 2200);
+      return;
+    }
+    const item = script[i];
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble ' + item.who;
+    bubble.textContent = item.text;
+    transcript.appendChild(bubble);
+    i++;
+    setTimeout(step, 1500);
+  }
+  playScript();
+
+  // Questionnaire "quel agent choisir"
+  const quizStep1 = document.getElementById('quizStep1');
+  const quizStep2 = document.getElementById('quizStep2');
+  const quizResult = document.getElementById('quizResult');
+  const quizBack = document.getElementById('quizBack');
+  const quizRestart = document.getElementById('quizRestart');
+  const resultTitle = document.getElementById('quizResultTitle');
+  const resultText = document.getElementById('quizResultText');
+
+  let quizAnswers = { secteur: null, besoin: null };
+
+  const results = {
+    inbound: {
+      title: 'Diana',
+      text: (secteur) => `Pour ${secteur}, Diana est la priorité : elle décroche chaque appel entrant, comprend la demande du client et prend rendez-vous directement dans votre agenda, jour et nuit.`
+    },
+    outbound: {
+      title: 'Marie',
+      text: (secteur) => `Pour ${secteur}, Marie est la priorité : elle relance vos devis sans réponse et recontacte vos prospects, pendant que vous vous concentrez sur votre activité.`
+    },
+    both: {
+      title: 'Diana & Marie',
+      text: (secteur) => `Pour ${secteur}, le duo complet fait la différence : Diana reçoit et prend rendez-vous, Marie relance vos prospects et vos devis. Ensemble, elles couvrent tout le parcours téléphonique.`
+    }
+  };
+
+  document.querySelectorAll('#quizStep1 button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      quizAnswers.secteur = btn.dataset.value;
+      quizStep1.hidden = true;
+      quizStep2.hidden = false;
+    });
+  });
+
+  document.querySelectorAll('#quizStep2 button[data-value]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      quizAnswers.besoin = btn.dataset.value;
+      const r = results[quizAnswers.besoin];
+      resultTitle.textContent = r.title;
+      resultText.textContent = r.text(quizAnswers.secteur);
+      quizStep2.hidden = true;
+      quizResult.hidden = false;
+    });
+  });
+
+  quizBack.addEventListener('click', () => {
+    quizStep2.hidden = true;
+    quizStep1.hidden = false;
+  });
+
+  quizRestart.addEventListener('click', () => {
+    quizAnswers = { secteur: null, besoin: null };
+    quizResult.hidden = true;
+    quizStep1.hidden = false;
+    leadNote.textContent = '';
+    leadName.value = '';
+    leadContact.value = '';
+  });
+
+  // Envoi du lead vers Supabase
+  const leadSubmit = document.getElementById('leadSubmit');
+  const leadName = document.getElementById('leadName');
+  const leadContact = document.getElementById('leadContact');
+  const leadNote = document.getElementById('leadNote');
+
+  leadSubmit.addEventListener('click', async () => {
+    const nom = leadName.value.trim();
+    const contact = leadContact.value.trim();
+
+    if (!contact) {
+      leadNote.textContent = 'Merci de renseigner au moins un téléphone ou un email.';
+      leadNote.classList.add('error');
+      return;
+    }
+    if (!supabaseClient) {
+      leadNote.textContent = "Configuration en attente, contactez-nous directement via le formulaire.";
+      leadNote.classList.add('error');
+      return;
+    }
+
+    leadSubmit.disabled = true;
+    leadNote.classList.remove('error');
+    leadNote.textContent = 'Envoi en cours...';
+
+    const { error } = await supabaseClient.from('leads').insert({
+      nom: nom || null,
+      contact: contact,
+      secteur: quizAnswers.secteur,
+      besoin: quizAnswers.besoin
+    });
+
+    leadSubmit.disabled = false;
+    if (error) {
+      leadNote.textContent = "Une erreur est survenue, merci de réessayer.";
+      leadNote.classList.add('error');
+    } else {
+      leadNote.textContent = 'Merci ! Nous vous recontactons rapidement.';
+      leadName.value = '';
+      leadContact.value = '';
+    }
+  });
+
+  // Active nav state on scroll
+  const sections = document.querySelectorAll('main section[id], main #accueil');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 100;
+      if (window.scrollY >= top) current = sec.id;
+    });
+    navAnchors.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? '#F3F6F5' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
