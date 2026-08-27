@@ -273,6 +273,28 @@
     color:var(--text-dim);
   }
 
+  .waveform.paused span{animation-play-state:paused; opacity:0.35;}
+
+  .call-controls{
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    display:flex;
+    gap:12px;
+  }
+  .call-btn{
+    flex:1;
+    text-align:center;
+    padding:13px;
+    font-size:0.92rem;
+  }
+  .call-note{
+    margin-top:12px;
+    font-size:0.76rem;
+    color:var(--text-dim);
+    text-align:center;
+  }
+
   /* ---------- SECTION GENERIC ---------- */
   section{padding:88px 0;}
   .section-head{
@@ -285,7 +307,7 @@
   /* ---------- CAPABILITIES ---------- */
   .cap-row{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(3, 1fr);
     gap:1px;
     background:var(--line);
     border:1px solid var(--line);
@@ -294,11 +316,37 @@
   }
   .cap{
     background:var(--bg-elevated);
-    padding:30px 24px;
+    padding:32px 28px;
   }
   .cap svg{margin-bottom:16px;}
-  .cap h3{font-size:1.05rem; font-weight:600; font-family:'Inter'; margin-bottom:8px;}
+  .cap h3{font-size:1.1rem; font-weight:600; font-family:'Inter'; margin-bottom:6px;}
   .cap p{color:var(--text-muted); font-size:0.92rem;}
+  .cap-subtitle{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--amber);
+    margin-bottom:18px;
+  }
+  .cap-list{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .cap-list li{
+    font-size:0.88rem;
+    color:var(--text);
+    padding:10px 0;
+    border-top:1px solid var(--line);
+    display:flex;
+    gap:9px;
+  }
+  .cap-list li:first-child{border-top:none;}
+  .cap-list li::before{
+    content:"→";
+    color:var(--turquoise);
+    flex-shrink:0;
+  }
 
   /* ---------- AGENTS DUO ---------- */
   .duo{
@@ -651,7 +699,7 @@
       <div>
         <span class="eyebrow">Agents vocaux IA · Guadeloupe</span>
         <h1>Votre téléphone ne <em>manque</em><br>plus jamais un client.</h1>
-        <p class="lead">EUR'IA conçoit des agents vocaux qui répondent à vos appels, prennent les rendez-vous et relancent vos prospects — en français comme en créole, 24h/24, sans embaucher personne.</p>
+        <p class="lead">EUR'IA conçoit des agents vocaux qui répondent à vos appels, prennent les rendez-vous et relancent vos prospects — 24h/24, sans embaucher personne.</p>
         <div class="hero-actions">
           <a href="https://eur-ia-onbaording.vercel.app" class="btn-primary" target="_blank" rel="noopener">Remplir le formulaire de démarrage</a>
           <a href="#agents" class="btn-ghost">Voir comment ça marche</a>
@@ -660,15 +708,16 @@
 
       <div class="call-panel">
         <div class="call-panel-head">
-          <div class="call-status"><span class="pulse-dot"></span> APPEL EN COURS</div>
+          <div class="call-status"><span class="pulse-dot" id="pulseDot"></span> <span id="callStatusText">ESSAYEZ DIANA EN DIRECT</span></div>
           <div class="call-agent">AGENT · DIANA</div>
         </div>
         <div class="waveform" id="waveform"></div>
         <div class="transcript" id="transcript"></div>
-        <div class="call-footer">
-          <span>00:24</span>
-          <span>RDV pris automatiquement</span>
+        <div class="call-controls">
+          <button type="button" class="btn-primary call-btn" id="startCallBtn">🎙️ Parler à Diana</button>
+          <button type="button" class="btn-ghost call-btn" id="endCallBtn" hidden>Terminer l'appel</button>
         </div>
+        <p class="call-note">Démo en direct — votre micro sera utilisé, aucun appel n'est enregistré.</p>
       </div>
     </div>
   </section>
@@ -684,23 +733,39 @@
       <div class="cap-row">
         <div class="cap">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M4 13c0-5 4-9 9-9s9 4 9 9" stroke="#2FE6C4" stroke-width="1.6"/><rect x="2" y="12" width="4" height="8" rx="1.5" stroke="#2FE6C4" stroke-width="1.6"/><rect x="20" y="12" width="4" height="8" rx="1.5" stroke="#2FE6C4" stroke-width="1.6"/></svg>
-          <h3>Réception d'appels</h3>
-          <p>Chaque appel entrant est décroché en quelques secondes, jour et nuit, week-ends compris.</p>
-        </div>
-        <div class="cap">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="3" y="3" width="20" height="20" rx="3" stroke="#2FE6C4" stroke-width="1.6"/><path d="M8 13l3.5 3.5L18 9" stroke="#2FE6C4" stroke-width="1.6"/></svg>
-          <h3>Prise de rendez-vous</h3>
-          <p>L'agent consulte votre agenda en direct et confirme le créneau sans intervention humaine.</p>
+          <h3>Agents en réception d'appel</h3>
+          <span class="cap-subtitle">Inbound — le client appelle l'entreprise</span>
+          <ul class="cap-list">
+            <li>Agent de prise de rendez-vous</li>
+            <li>Agent de qualification de leads</li>
+            <li>Agent SAV / support niveau 1</li>
+            <li>Agent de standard / routage</li>
+            <li>Agent d'urgence / astreinte</li>
+          </ul>
         </div>
         <div class="cap">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M3 8l10 6 10-6" stroke="#2FE6C4" stroke-width="1.6"/><rect x="3" y="5" width="20" height="16" rx="2.5" stroke="#2FE6C4" stroke-width="1.6"/></svg>
-          <h3>Relance de prospects</h3>
-          <p>Devis sans réponse, clients à recontacter : l'agent sortant appelle pour vous à votre place.</p>
+          <h3>Agents en émission d'appel</h3>
+          <span class="cap-subtitle">Outbound — l'agent appelle le prospect/client</span>
+          <ul class="cap-list">
+            <li>Agent de prospection</li>
+            <li>Agent de relance devis</li>
+            <li>Agent de confirmation de RDV</li>
+            <li>Agent de recouvrement</li>
+            <li>Agent d'enquête de satisfaction</li>
+          </ul>
         </div>
         <div class="cap">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="#2FE6C4" stroke-width="1.6"/><path d="M13 8v6l4 2" stroke="#2FE6C4" stroke-width="1.6"/></svg>
-          <h3>Gestion des débordements</h3>
-          <p>Aux heures de pointe, l'agent prend le relais pour qu'aucun client ne tombe sur une sonnerie dans le vide.</p>
+          <h3>Agents spécialisés par secteur</h3>
+          <span class="cap-subtitle">Verticalisés pour un métier précis</span>
+          <ul class="cap-list">
+            <li>Immobilier</li>
+            <li>Médical / paramédical</li>
+            <li>Automobile</li>
+            <li>Restauration</li>
+            <li>RH / Recrutement</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -721,7 +786,6 @@
           <p>Décroche chaque appel entrant, comprend la demande du client et prend rendez-vous directement dans votre agenda.</p>
           <ul>
             <li>Réponse en moins de 3 secondes</li>
-            <li>Comprend le français et le créole</li>
             <li>Synchronisée avec votre calendrier</li>
             <li>Transfère les urgences vers vous</li>
           </ul>
@@ -776,7 +840,7 @@
         <div class="step">
           <span class="num">02</span>
           <h3>L'agent échange naturellement</h3>
-          <p>En français ou en créole, l'agent comprend la demande et répond comme le ferait votre équipe.</p>
+          <p>L'agent comprend la demande et répond naturellement, comme le ferait votre équipe.</p>
         </div>
         <div class="step">
           <span class="num">03</span>
@@ -793,7 +857,7 @@
       <div class="section-head">
         <span class="eyebrow">Vous hésitez ?</span>
         <h2>Trouvez l'agent qu'il vous faut en 30 secondes.</h2>
-        <p>Deux questions rapides, et on vous dit si c'est Diana, Marie, ou les deux qu'il vous faut.</p>
+        <p>Un petit jeu de piste en 2 questions parmi nos 15 agents, pour vous dire précisément lequel vous correspond.</p>
       </div>
 
       <div class="quiz-panel">
@@ -801,36 +865,28 @@
         <!-- Étape 1 -->
         <div class="quiz-step" id="quizStep1">
           <span class="quiz-progress">Étape 1 / 2</span>
-          <h3>Quel est votre secteur d'activité ?</h3>
-          <div class="quiz-options quiz-options-grid" data-question="secteur">
-            <button type="button" data-value="BTP">BTP &amp; artisans</button>
-            <button type="button" data-value="vétérinaire">Vétérinaire</button>
-            <button type="button" data-value="kinésithérapie">Kinésithérapie</button>
-            <button type="button" data-value="coiffure">Coiffure</button>
-            <button type="button" data-value="esthétique">Esthétique</button>
-            <button type="button" data-value="immobilier">Immobilier</button>
-            <button type="button" data-value="votre activité">Autre activité</button>
+          <h3>Comment imaginez-vous votre agent idéal ?</h3>
+          <div class="quiz-options quiz-options-stack" data-question="categorie">
+            <button type="button" data-value="inbound">
+              <strong>📞 Il décroche mes appels</strong>
+              <span>Un client vous appelle, l'agent répond à sa place.</span>
+            </button>
+            <button type="button" data-value="outbound">
+              <strong>📱 Il appelle pour moi</strong>
+              <span>L'agent contacte vos prospects ou clients à votre place.</span>
+            </button>
+            <button type="button" data-value="secteur">
+              <strong>🎯 Il connaît déjà mon métier</strong>
+              <span>Un agent déjà pensé pour votre secteur d'activité.</span>
+            </button>
           </div>
         </div>
 
         <!-- Étape 2 -->
         <div class="quiz-step" id="quizStep2" hidden>
           <span class="quiz-progress">Étape 2 / 2</span>
-          <h3>Quel est votre principal défi aujourd'hui ?</h3>
-          <div class="quiz-options quiz-options-stack" data-question="besoin">
-            <button type="button" data-value="inbound">
-              <strong>Je rate des appels et des rendez-vous</strong>
-              <span>Le téléphone sonne pendant que vous travaillez, et vous perdez des clients.</span>
-            </button>
-            <button type="button" data-value="outbound">
-              <strong>Je n'ai pas le temps de relancer mes prospects</strong>
-              <span>Devis envoyés sans réponse, clients à recontacter, prospection qui traîne.</span>
-            </button>
-            <button type="button" data-value="both">
-              <strong>Les deux à la fois</strong>
-              <span>Vous perdez des appels et vous n'avez pas le temps de relancer.</span>
-            </button>
-          </div>
+          <h3 id="quizStep2Title">Lequel vous correspond le plus ?</h3>
+          <div class="quiz-options quiz-options-stack" id="quizStep2Options" data-question="agent"></div>
           <button type="button" class="quiz-back" id="quizBack">← Revenir à l'étape précédente</button>
         </div>
 
@@ -918,35 +974,141 @@
     waveform.appendChild(bar);
   }
 
-  // Transcript loop
-  const script = [
+  // Transcript loop (aperçu animé, tant qu'aucun appel réel n'est en cours)
+  const demoScript = [
     { who: 'client', text: 'Bonjour, je voudrais un rendez-vous cette semaine.' },
     { who: 'diana', text: 'Bien sûr ! Jeudi 10h ou vendredi 14h, ça vous convient ?' },
     { who: 'client', text: 'Vendredi 14h, parfait.' },
-    { who: 'diana', text: 'C\\'est noté, vous recevez la confirmation par SMS.' }
+    { who: 'diana', text: 'C\'est noté, vous recevez la confirmation par SMS.' }
   ];
   const transcript = document.getElementById('transcript');
-  let i = 0;
+  let demoIndex = 0;
+  let demoTimer = null;
+  let realCallActive = false;
 
-  function playScript(){
+  function playDemoScript(){
+    if (realCallActive) return;
     transcript.innerHTML = '';
-    i = 0;
-    step();
+    demoIndex = 0;
+    demoStep();
   }
-  function step(){
-    if (i >= script.length) {
-      setTimeout(playScript, 2200);
+  function demoStep(){
+    if (realCallActive) return;
+    if (demoIndex >= demoScript.length) {
+      demoTimer = setTimeout(playDemoScript, 2200);
       return;
     }
-    const item = script[i];
+    const item = demoScript[demoIndex];
     const bubble = document.createElement('div');
     bubble.className = 'bubble ' + item.who;
     bubble.textContent = item.text;
     transcript.appendChild(bubble);
-    i++;
-    setTimeout(step, 1500);
+    demoIndex++;
+    demoTimer = setTimeout(demoStep, 1500);
   }
-  playScript();
+  playDemoScript();
+
+  // ==== APPEL RÉEL AVEC DIANA (Retell AI) ====
+  // Remplace cette valeur par l'URL de ton webhook N8N
+  const N8N_WEBHOOK_URL = 'https://n8n.srv1478304.hstgr.cloud/webhook/cc82830e-4ff6-4270-a80d-da9c78790036';
+
+  const startCallBtn = document.getElementById('startCallBtn');
+  const endCallBtn = document.getElementById('endCallBtn');
+  const callStatusText = document.getElementById('callStatusText');
+  const pulseDot = document.getElementById('pulseDot');
+
+  let retellWebClient = null;
+
+  async function loadRetellClient(){
+    const module = await import('https://cdn.jsdelivr.net/npm/retell-client-js-sdk@2.0.7/+esm');
+    return module.RetellWebClient;
+  }
+
+  function addRealBubble(role, text){
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble ' + (role === 'agent' ? 'diana' : 'client');
+    bubble.textContent = text;
+    transcript.appendChild(bubble);
+    transcript.scrollTop = transcript.scrollHeight;
+  }
+
+  startCallBtn.addEventListener('click', async () => {
+    if (N8N_WEBHOOK_URL.startsWith('REMPLACE')) {
+      callStatusText.textContent = 'Configuration en attente';
+      return;
+    }
+
+    startCallBtn.disabled = true;
+    callStatusText.textContent = 'Connexion en cours...';
+    clearTimeout(demoTimer);
+    realCallActive = true;
+    transcript.innerHTML = '';
+
+    try {
+      const RetellWebClient = await loadRetellClient();
+      retellWebClient = new RetellWebClient();
+
+      retellWebClient.on('call_started', () => {
+        callStatusText.textContent = 'En communication avec Diana';
+        pulseDot.style.background = 'var(--turquoise)';
+      });
+      retellWebClient.on('agent_start_talking', () => {
+        waveform.classList.remove('paused');
+      });
+      retellWebClient.on('agent_stop_talking', () => {
+        waveform.classList.add('paused');
+      });
+      retellWebClient.on('update', (update) => {
+        if (!update.transcript || !update.transcript.length) return;
+        transcript.innerHTML = '';
+        update.transcript.forEach(t => addRealBubble(t.role, t.content));
+      });
+      retellWebClient.on('call_ended', () => {
+        callStatusText.textContent = 'Appel terminé — merci !';
+        startCallBtn.hidden = false;
+        startCallBtn.disabled = false;
+        startCallBtn.textContent = '🎙️ Réessayer';
+        endCallBtn.hidden = true;
+        realCallActive = false;
+        setTimeout(() => {
+          callStatusText.textContent = 'ESSAYEZ DIANA EN DIRECT';
+          startCallBtn.textContent = '🎙️ Parler à Diana';
+          playDemoScript();
+        }, 4000);
+      });
+      retellWebClient.on('error', (error) => {
+        console.error('Erreur appel Retell:', error);
+        callStatusText.textContent = "Erreur de connexion, réessayez";
+        startCallBtn.hidden = false;
+        startCallBtn.disabled = false;
+        endCallBtn.hidden = true;
+        realCallActive = false;
+        retellWebClient.stopCall();
+      });
+
+      const response = await fetch(N8N_WEBHOOK_URL, { method: 'POST' });
+      if (!response.ok) throw new Error('Webhook N8N indisponible');
+      const { accessToken } = await response.json();
+
+      startCallBtn.hidden = true;
+      endCallBtn.hidden = false;
+      waveform.classList.remove('paused');
+
+      await retellWebClient.startCall({ accessToken });
+
+    } catch (err) {
+      console.error(err);
+      callStatusText.textContent = "Impossible de démarrer l'appel";
+      startCallBtn.disabled = false;
+      startCallBtn.hidden = false;
+      endCallBtn.hidden = true;
+      realCallActive = false;
+    }
+  });
+
+  endCallBtn.addEventListener('click', () => {
+    if (retellWebClient) retellWebClient.stopCall();
+  });
 
   // Questionnaire "quel agent choisir"
   const quizStep1 = document.getElementById('quizStep1');
@@ -956,40 +1118,71 @@
   const quizRestart = document.getElementById('quizRestart');
   const resultTitle = document.getElementById('quizResultTitle');
   const resultText = document.getElementById('quizResultText');
+  const quizStep2Title = document.getElementById('quizStep2Title');
+  const quizStep2Options = document.getElementById('quizStep2Options');
 
-  let quizAnswers = { secteur: null, besoin: null };
+  let quizAnswers = { categorie: null, agent: null };
 
-  const results = {
+  const AGENTS = {
     inbound: {
-      title: 'Diana',
-      text: (secteur) => `Pour ${secteur}, Diana est la priorité : elle décroche chaque appel entrant, comprend la demande du client et prend rendez-vous directement dans votre agenda, jour et nuit.`
+      label: "Agents en réception d'appel",
+      question: "Le client vous appelle. Il a besoin de quoi ?",
+      options: [
+        { name: "Agent de prise de rendez-vous", desc: "Il consulte votre agenda et confirme un créneau en direct, sans double réservation.", text: "consulte votre agenda et confirme un créneau en direct avec vos clients" },
+        { name: "Agent de qualification de leads", desc: "Il pose les bonnes questions pour trier les prospects sérieux avant de vous les transmettre.", text: "qualifie vos prospects au téléphone avant de vous les transmettre" },
+        { name: "Agent SAV / support niveau 1", desc: "Il répond aux questions courantes et résout les problèmes simples sans faire attendre le client.", text: "répond aux questions courantes de vos clients sans les faire attendre" },
+        { name: "Agent de standard / routage", desc: "Il identifie la demande et redirige l'appel vers la bonne personne ou le bon service.", text: "identifie chaque demande et redirige l'appel vers la bonne personne" },
+        { name: "Agent d'urgence / astreinte", desc: "Il filtre les urgences réelles et vous alerte immédiatement, même en dehors des horaires.", text: "filtre les urgences réelles et vous alerte immédiatement, même hors horaires" }
+      ]
     },
     outbound: {
-      title: 'Marie',
-      text: (secteur) => `Pour ${secteur}, Marie est la priorité : elle relance vos devis sans réponse et recontacte vos prospects, pendant que vous vous concentrez sur votre activité.`
+      label: "Agents en émission d'appel",
+      question: "L'agent appelle pour vous. Dans quel but ?",
+      options: [
+        { name: "Agent de prospection", desc: "Il appelle une liste de prospects pour présenter votre offre et décrocher des rendez-vous.", text: "appelle vos prospects pour présenter votre offre et décrocher des rendez-vous" },
+        { name: "Agent de relance devis", desc: "Il relance les devis envoyés sans réponse, au bon moment, sans que vous ayez à y penser.", text: "relance vos devis sans réponse, au bon moment, sans que vous ayez à y penser" },
+        { name: "Agent de confirmation de RDV", desc: "Il appelle la veille pour confirmer le rendez-vous et réduire les absences.", text: "confirme vos rendez-vous la veille pour réduire les absences" },
+        { name: "Agent de recouvrement", desc: "Il relance poliment les factures impayées, de façon régulière et sans confrontation.", text: "relance poliment vos factures impayées, sans confrontation" },
+        { name: "Agent d'enquête de satisfaction", desc: "Il appelle après une prestation pour recueillir un avis client à chaud.", text: "appelle vos clients après une prestation pour recueillir leur avis" }
+      ]
     },
-    both: {
-      title: 'Diana & Marie',
-      text: (secteur) => `Pour ${secteur}, le duo complet fait la différence : Diana reçoit et prend rendez-vous, Marie relance vos prospects et vos devis. Ensemble, elles couvrent tout le parcours téléphonique.`
+    secteur: {
+      label: "Agents spécialisés par secteur",
+      question: "Quel est votre secteur d'activité ?",
+      options: [
+        { name: "Agent Immobilier", desc: "Qualifie les appels et prend rendez-vous pour les visites de biens.", text: "qualifie vos appels et prend rendez-vous pour les visites de biens" },
+        { name: "Agent Médical / paramédical", desc: "Gère les prises de rendez-vous et les urgences de patientèle.", text: "gère les prises de rendez-vous et les urgences de votre patientèle" },
+        { name: "Agent Automobile", desc: "Prend rendez-vous pour les essais, l'entretien ou le SAV.", text: "prend rendez-vous pour les essais, l'entretien ou le SAV" },
+        { name: "Agent Restauration", desc: "Gère les réservations de table et les demandes fréquentes.", text: "gère vos réservations de table et les demandes fréquentes" },
+        { name: "Agent RH / Recrutement", desc: "Présélectionne les candidats par téléphone avant l'entretien.", text: "présélectionne vos candidats par téléphone avant l'entretien" }
+      ]
     }
   };
 
   document.querySelectorAll('#quizStep1 button').forEach(btn => {
     btn.addEventListener('click', () => {
-      quizAnswers.secteur = btn.dataset.value;
+      const cat = btn.dataset.value;
+      quizAnswers.categorie = cat;
+
+      const catData = AGENTS[cat];
+      quizStep2Title.textContent = catData.question;
+      quizStep2Options.innerHTML = '';
+      catData.options.forEach(opt => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.innerHTML = `<strong>${opt.name}</strong><span>${opt.desc}</span>`;
+        b.addEventListener('click', () => {
+          quizAnswers.agent = opt.name;
+          resultTitle.textContent = opt.name;
+          resultText.textContent = `Il ${opt.text}. C'est l'agent le plus adapté à ce que vous recherchez.`;
+          quizStep2.hidden = true;
+          quizResult.hidden = false;
+        });
+        quizStep2Options.appendChild(b);
+      });
+
       quizStep1.hidden = true;
       quizStep2.hidden = false;
-    });
-  });
-
-  document.querySelectorAll('#quizStep2 button[data-value]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      quizAnswers.besoin = btn.dataset.value;
-      const r = results[quizAnswers.besoin];
-      resultTitle.textContent = r.title;
-      resultText.textContent = r.text(quizAnswers.secteur);
-      quizStep2.hidden = true;
-      quizResult.hidden = false;
     });
   });
 
@@ -999,7 +1192,7 @@
   });
 
   quizRestart.addEventListener('click', () => {
-    quizAnswers = { secteur: null, besoin: null };
+    quizAnswers = { categorie: null, agent: null };
     quizResult.hidden = true;
     quizStep1.hidden = false;
     leadNote.textContent = '';
@@ -1035,8 +1228,8 @@
     const { error } = await supabaseClient.from('leads').insert({
       nom: nom || null,
       contact: contact,
-      secteur: quizAnswers.secteur,
-      besoin: quizAnswers.besoin
+      secteur: quizAnswers.categorie,
+      besoin: quizAnswers.agent
     });
 
     leadSubmit.disabled = false;
