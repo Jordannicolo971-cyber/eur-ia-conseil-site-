@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentions légales — EUR'IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #060B18;
+    --bg-elevated: #0E1B30;
+    --line: #223655;
+    --turquoise: #2E7CF6;
+    --amber: #6FB1FF;
+    --text: #F5F8FF;
+    --text-muted: #93A6C2;
+    --text-dim: #5C7290;
+    --radius: 14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--turquoise); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{max-width:820px; margin:0 auto; padding:0 28px;}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:24px 0;
+  }
+  .logo{
+    font-family:'Poppins', sans-serif;
+    font-size:1.15rem;
+    font-weight:800;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{color:var(--turquoise);}
+  .logo-grad{
+    background:linear-gradient(135deg, var(--turquoise), var(--amber));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top:10px;
+    font-size:0.88rem;
+    color:var(--text-dim);
+  }
+
+  main{padding:56px 0 80px;}
+  h1{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:clamp(1.6rem, 3vw, 2.1rem);
+    margin-bottom:12px;
+  }
+  .updated{color:var(--text-dim); font-size:0.85rem; margin-bottom:44px;}
+
+  h2{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:1.15rem;
+    margin:40px 0 14px;
+    color:var(--amber);
+  }
+  h2:first-of-type{margin-top:0;}
+  p{color:var(--text-muted); margin-bottom:12px; font-size:0.96rem;}
+  strong{color:var(--text); font-weight:600;}
+
+  .info-box{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px 28px;
+    margin:16px 0;
+  }
+  .info-row{
+    display:flex; gap:8px;
+    padding:8px 0;
+    border-top:1px solid var(--line);
+    font-size:0.94rem;
+    flex-wrap:wrap;
+  }
+  .info-row:first-child{border-top:none; padding-top:0;}
+  .info-row span:first-child{color:var(--text-dim); min-width:180px;}
+  .info-row span:last-child{color:var(--text);}
+  .fine-print{
+    font-size:0.76rem;
+    color:var(--text-dim);
+    margin-top:16px;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0;
+    text-align:center;
+  }
+  footer p{color:var(--text-dim); font-size:0.85rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="dot">●</span> EUR'<span class="logo-grad">IA</span></a>
+    <a href="index.html" class="back-link">← Retour au site</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <h1>Mentions légales</h1>
+    <p class="updated">Dernière mise à jour : août 2026</p>
+
+    <h2>Éditeur du site</h2>
+    <div class="info-box">
+      <div class="info-row"><span>Nom commercial</span><span>EUR'IA</span></div>
+      <div class="info-row"><span>Statut juridique</span><span>Micro-entreprise</span></div>
+      <div class="info-row"><span>SIRET</span><span>903 070 233 00023</span></div>
+      <div class="info-row"><span>Adresse</span><span>1 Lot, Immeuble Jarry Plat, 97122 Baie-Mahault, Guadeloupe</span></div>
+      <div class="info-row"><span>Téléphone</span><span>+590 690 09 13 22</span></div>
+      <div class="info-row"><span>Email</span><span>eur.ia.conseil@gmail.com</span></div>
+    </div>
+    <p class="fine-print">Responsable de l'exploitation et directeur de la publication : Jordan Nicolo.</p>
+
+    <h2>Hébergement</h2>
+    <p>Le site est hébergé par :</p>
+    <div class="info-box">
+      <div class="info-row"><span>Hébergeur</span><span>Vercel Inc.</span></div>
+      <div class="info-row"><span>Adresse</span><span>340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis</span></div>
+      <div class="info-row"><span>Site web</span><span><a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a></span></div>
+    </div>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>L'ensemble des contenus présents sur ce site (textes, graphismes, logo, structure) sont la propriété exclusive d'EUR'IA, sauf mention contraire. Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation préalable, est interdite.</p>
+
+    <h2>Données personnelles</h2>
+    <p>Ce site propose un formulaire de rappel (dans le questionnaire "Quel agent choisir ?") permettant de laisser un prénom et un moyen de contact (téléphone ou email). Ces informations sont collectées uniquement dans le but de vous recontacter à propos de votre demande, et ne sont ni revendues ni transmises à des tiers.</p>
+    <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant. Pour l'exercer, contactez-nous à <a href="mailto:eur.ia.conseil@gmail.com">eur.ia.conseil@gmail.com</a>.</p>
+
+    <h2>Cookies</h2>
+    <p>Ce site n'utilise pas de cookies de suivi publicitaire ou de mesure d'audience tierce.</p>
+
+    <h2>Démonstration vocale</h2>
+    <p>Le site propose une démonstration d'appel vocal en direct avec un agent IA (Diana). Cette démonstration nécessite l'accès à votre microphone, uniquement pendant la durée de l'appel. Aucun enregistrement n'est conservé au-delà de la session de démonstration.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 EUR'IA — Solutions IA &amp; agents vocaux, Guadeloupe.</p>
+  </div>
+</footer>
+
+</body>
+</html>
